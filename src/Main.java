@@ -11,7 +11,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public final class Main {
 
 	public static final void main(String[] arguments) throws SlickException {
-		String title = "Sans titre";
+		String title = "Cube Dungeon";
 		int width = 1280;
 		int height = 720;
 		boolean fullscreen = false;
@@ -46,7 +46,7 @@ public final class Main {
 				this.addState(new pages.Welcome(0));
 				this.addState(new pages.Choice(1));
 				this.addState(new pages.Pause(2));
-				this.addState(new test.World(3));
+				this.addState(new games.cubeDungeon.World(3));
 			}
 
 		};
