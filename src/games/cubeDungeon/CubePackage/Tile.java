@@ -12,8 +12,8 @@ public class Tile {
 	
 	public Tile(int line, int column) {
 		this.tile_size = 40;
-		this.x = 40;
-		this.y = 50;
+		this.x = (tile_size+1)*line;
+		this.y = (tile_size+1)*column;
 		this.line = line;
 		this.column = column;
 	}

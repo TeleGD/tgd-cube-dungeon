@@ -7,6 +7,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
+import games.cubeDungeon.CubePackage.*;
 
 import games.cubeDungeon.CubePackage.Tile;
 
@@ -15,10 +16,12 @@ public class World extends BasicGameState {
 
 	private int ID;
 	private int state;
+	private Face face;
 
 	public World(int ID) {
 		this.ID = ID;
 		this.state = 0;
+		this.face = new Face(10);
 	}
 
 	@Override
@@ -65,8 +68,7 @@ public class World extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		/* Méthode exécutée environ 60 fois par seconde */
-		Tile coucou = new Tile (450,888);
-		coucou.render(container,game,context);
+		face.render(container,game,context);
 	}
 
 	public void play(GameContainer container, StateBasedGame game) {
