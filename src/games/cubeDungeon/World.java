@@ -65,7 +65,7 @@ public class World extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		/* Méthode exécutée environ 60 fois par seconde */
-		Tile coucou = new Tile (45,789);
+		Tile coucou = new Tile (450,888);
 		coucou.render(container,game,context);
 	}
 
