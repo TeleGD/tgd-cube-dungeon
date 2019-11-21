@@ -8,6 +8,8 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+import games.cubeDungeon.CubePackage.Tile;
+
 
 public class World extends BasicGameState {
 
@@ -63,6 +65,8 @@ public class World extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		/* Méthode exécutée environ 60 fois par seconde */
+		Tile coucou = new Tile (45,789);
+		coucou.render(container,game,context);
 	}
 
 	public void play(GameContainer container, StateBasedGame game) {
