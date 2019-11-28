@@ -7,10 +7,8 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Cube {
 	
 	private Layer current_layer;
-	private int screen_width;
 	
 	public Cube(int current_layer_width, int screen_width, int screen_height) {
-		this.screen_width= screen_width;
 		current_layer = new Layer(current_layer_width, screen_width, screen_height, current_layer_width);
 		}
 	

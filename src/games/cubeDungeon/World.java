@@ -23,7 +23,6 @@ public class World extends BasicGameState {
 	public World(int ID) {
 		this.ID = ID;
 		this.state = 0;
-		this.cube = new Cube(40, 1280, 920);
 	}
 
 	@Override
@@ -36,6 +35,7 @@ public class World extends BasicGameState {
 		/* Méthode exécutée une unique fois au chargement du programme */
 		this.screen_width=container.getWidth();
 		this.screen_height=container.getHeight();
+		this.cube = new Cube(20,screen_width,screen_height);
 	}
 
 	@Override
