@@ -1,5 +1,6 @@
 package games.cubeDungeon.CubePackage;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.StateBasedGame;
@@ -20,6 +21,7 @@ public class Tile {
 		this.column = column;
 	}
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
+		context.setColor(Color.white);
 		context.fillRect(this.x,this.y, this.tile_size,this.tile_size);
 	}
 	

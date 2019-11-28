@@ -19,10 +19,12 @@ public class World extends BasicGameState {
 	private Cube cube;
 	private int screen_width;/*largeur de l'écran*/
 	private int screen_height;/*hauteur de l'écran*/
+	private Player Nico;
 
 	public World(int ID) {
 		this.ID = ID;
 		this.state = 0;
+		this.Nico = new Player();
 	}
 
 	@Override
@@ -35,7 +37,7 @@ public class World extends BasicGameState {
 		/* Méthode exécutée une unique fois au chargement du programme */
 		this.screen_width=container.getWidth();
 		this.screen_height=container.getHeight();
-		this.cube = new Cube(20,screen_width,screen_height);
+		this.cube = new Cube(30,screen_width,screen_height);
 	}
 
 	@Override
@@ -67,12 +69,14 @@ public class World extends BasicGameState {
 			this.setState(1);
 			game.enterState(2, new FadeOutTransition(), new FadeInTransition());
 		}
+		Nico.update(container, game, delta);
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		/* Méthode exécutée environ 60 fois par seconde */
 		cube.render(container,game,context);
+		Nico.render(container, game, context);
 	}
 
 	public void play(GameContainer container, StateBasedGame game) {
@@ -97,6 +101,20 @@ public class World extends BasicGameState {
 
 	public int getState() {
 		return this.state;
+	}
+	public void setPlayer(Player player) {
+		this.Nico = player;
+	}
+
+	public Player getPlayer() {
+		return this.Nico;
+	}
+	public void keyPressed(int key, char c) {
+		this.Nico.keyPressed(key, c);
+	}
+
+	public void keyReleased(int key, char c) {
+		this.Nico.keyReleased(key, c);
 	}
 
 }
