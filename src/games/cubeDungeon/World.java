@@ -16,12 +16,14 @@ public class World extends BasicGameState {
 
 	private int ID;
 	private int state;
-	private Face face;
+	private Cube cube;
+	private int screen_width;/*largeur de l'écran*/
+	private int screen_height;/*hauteur de l'écran*/
 
 	public World(int ID) {
 		this.ID = ID;
 		this.state = 0;
-		this.face = new Face(10);
+		this.cube = new Cube(40, 1280, 920);
 	}
 
 	@Override
@@ -32,6 +34,8 @@ public class World extends BasicGameState {
 	@Override
 	public void init(GameContainer container, StateBasedGame game) {
 		/* Méthode exécutée une unique fois au chargement du programme */
+		this.screen_width=container.getWidth();
+		this.screen_height=container.getHeight();
 	}
 
 	@Override
@@ -68,7 +72,7 @@ public class World extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		/* Méthode exécutée environ 60 fois par seconde */
-		face.render(container,game,context);
+		cube.render(container,game,context);
 	}
 
 	public void play(GameContainer container, StateBasedGame game) {
