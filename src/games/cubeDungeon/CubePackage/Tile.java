@@ -11,8 +11,8 @@ public class Tile {
 	int tile_size;
 
 	
-	public Tile(int line, int column, int screen_width, int screen_height, int face_width) {
-		this.tile_size = 25;
+	public Tile(int line, int column, int screen_width, int screen_height, int face_width, int N) {
+		this.tile_size = screen_height/(N+2);
 		this.x = (tile_size+1)*line;
 		this.y = (tile_size+1)*column;
 		this.line = line;
@@ -22,6 +22,4 @@ public class Tile {
 		context.fillRect(this.x,this.y, this.tile_size,this.tile_size);
 	}
 	
-	
-
 }
