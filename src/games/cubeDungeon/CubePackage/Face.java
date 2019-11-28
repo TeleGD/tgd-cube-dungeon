@@ -21,7 +21,7 @@ public class Face {
 		this.face_width = face_width;
 		for (int i = 0; i < face_width; i++) {
 			for (int j = 0; j < face_width; j++) {
-				grille[i][j] = new Tile(i,j, this.screen_width, this.screen_height);
+				grille[i][j] = new Tile(i,j, this.screen_width, this.screen_height, this.face_width);
 			}
 		}
 			
