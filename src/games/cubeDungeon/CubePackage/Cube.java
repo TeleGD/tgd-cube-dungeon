@@ -1,16 +1,20 @@
 package games.cubeDungeon.CubePackage;
 
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.state.StateBasedGame;
+
 public class Cube {
 	
 	private Layer current_layer;
 	
-	public Cube() {
-		current_layer = new Layer(32);
+	public Cube(int current_layer_width) {
+		current_layer = new Layer(current_layer_width);
 	}
 	
-	
-	
-	
+	public void render(GameContainer container, StateBasedGame game, Graphics context) {
+		current_layer.render(container, game, context);
+	}
 	
 	
 	

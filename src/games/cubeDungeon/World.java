@@ -16,12 +16,12 @@ public class World extends BasicGameState {
 
 	private int ID;
 	private int state;
-	private Face face;
+	private Cube cube;
 
 	public World(int ID) {
 		this.ID = ID;
 		this.state = 0;
-		this.face = new Face(10);
+		this.cube = new Cube(20);
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class World extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		/* Méthode exécutée environ 60 fois par seconde */
-		face.render(container,game,context);
+		cube.render(container,game,context);
 	}
 
 	public void play(GameContainer container, StateBasedGame game) {
