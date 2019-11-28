@@ -10,13 +10,18 @@ public class Face {
 
 	private Tile[][] grille;
 	private int face_width;
+	private int screen_width;/*largeur de l'écran*/
+	private int screen_height;/*hauteur de l'écran*/
+
 	
-	public Face(int face_width) {
+	public Face(int face_width, int screen_width, int screen_height) {
 		grille = new Tile[face_width][face_width];
+		this.screen_width= screen_width;
+		this.screen_height= screen_height;
 		this.face_width = face_width;
 		for (int i = 0; i < face_width; i++) {
 			for (int j = 0; j < face_width; j++) {
-				grille[i][j] = new Tile(i,j);
+				grille[i][j] = new Tile(i,j, this.screen_width, this.screen_height);
 			}
 		}
 			
