@@ -37,7 +37,7 @@ public class World extends BasicGameState {
 		/* Méthode exécutée une unique fois au chargement du programme */
 		this.screen_width=container.getWidth();
 		this.screen_height=container.getHeight();
-		this.cube = new Cube(30,screen_width,screen_height);
+		this.cube = new Cube(50,screen_width,screen_height);
 	}
 
 	@Override
