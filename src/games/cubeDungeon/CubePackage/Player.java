@@ -4,6 +4,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.Image;
+
 public class Player {
 
 	private double x;
@@ -21,15 +23,21 @@ public class Player {
 	private boolean upPress;
 	private boolean droitegauche;
 	private boolean hautbas;
+	private Image joueurVisu;
 
 	private int col;
 
-	public Player() {
+	public Player(int Ncase,int sWidth, int sHeight) {
+		int taille =  Math.min(sHeight, sWidth)/(Ncase+2);
 		this.x = 50;
 		this.y = 50;
-		this.width = 25;
-		this.height = 25;
+		this.width = taille;
+		this.height = taille;
 		this.col = 0;
+		try {
+			this.joueurVisu = new Image("/res/images/joueurVisuFirst.gif");
+			}catch(Exception e) {e.printStackTrace();}
+		
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta) {
@@ -44,7 +52,7 @@ public class Player {
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		// Affichage du carré bleu
 		context.setColor(Color.blue);
-		context.fillRect((float) this.x, (float) this.y, this.width, this.height);
+		joueurVisu.draw((float) this.x, (float) this.y, this.width, this.height);
 	}
 
 	public void keyPressed(int key, char c) {
