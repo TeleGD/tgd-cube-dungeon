@@ -30,7 +30,7 @@ public class Player {
 		this.col = 0;
 		try {
 			this.joueurVisu = new Image("/res/images/joueurVisuFirst.gif");
-			}catch(Exception e) {e.printStackTrace();}
+		}catch(Exception e) {e.printStackTrace();}
 		
 	}
 
