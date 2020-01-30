@@ -17,8 +17,8 @@ public class Tile {
 	
 	public Tile(int line, int column, int screen_width, int screen_height, int face_width, int N) {
 		this.tile_size = Math.min(screen_height,screen_width)/(N+2);
-		this.x = (tile_size)*line+screen_width/2-(tile_size)*(N/2);
-		this.y = screen_height-((tile_size)*column+screen_height/2-(tile_size)*(N/2)+tile_size);
+		this.x = (tile_size)*column+screen_width/2-(tile_size)*(N/2);
+		this.y = screen_height-((tile_size)*line+screen_height/2-(tile_size)*(N/2)+tile_size);
 		this.line = line;
 		this.column = column;
 		double choix = Math.random();
@@ -47,4 +47,11 @@ public class Tile {
 		texture.draw(this.x,this.y, this.tile_size,this.tile_size);
 	}
 	
+	public int getX() {
+		return this.x;
+	}
+
+	public int getY() {
+		return this.y;
+	}
 }

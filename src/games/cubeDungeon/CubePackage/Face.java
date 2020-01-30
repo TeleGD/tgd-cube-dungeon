@@ -21,8 +21,6 @@ public class Face {
 				grille[i][j] = new Tile(i,j, screen_width, screen_height, this.face_width, N);
 			}
 		}
-			
-		
 	}
 	
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
@@ -33,6 +31,9 @@ public class Face {
 		}
 	}
 	
+	public Tile getTile(int i, int j) {
+		return(this.grille[i][j]);
+	}
 	
 	
 }

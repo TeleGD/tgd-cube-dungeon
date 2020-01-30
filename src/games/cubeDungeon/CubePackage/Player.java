@@ -25,13 +25,15 @@ public class Player {
 
 	public Player(int Ncase,int sWidth, int sHeight, World world, Face actual) {
 		int taille =  Math.min(sHeight, sWidth)/(Ncase+2);
-		this.x = 0;
-		this.y = 0;
+		this.face = actual;
 		this.width = taille;
 		this.height = taille;
 		this.column = 0;
+		this.line = 0;
+		this.x = this.face.getTile(line, column).getX();
+		this.y = this.face.getTile(line, column).getY();
 		this.world=world;
-		//this.face = actual;
+		
 		try {
 			this.joueurVisu = new Image("/res/images/joueurVisuFirst.gif");
 			}catch(Exception e) {e.printStackTrace();}
@@ -39,8 +41,10 @@ public class Player {
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta) {
-		this.x += (this.rightPress ? 1 : (this.leftPress ? -1 : 0));
-		this.y += (this.upPress ? -1 : (this.downPress ? 1 : 0));
+		this.column += (this.rightPress ? 1 : (this.leftPress ? -1 : 0));
+		this.line += (this.upPress ? 1 : (this.downPress ? -1 : 0));
+		this.x = this.face.getTile(line, column).getX();
+		this.y = this.face.getTile(line, column).getY();
 		//solution caca en attendant le template arcade
 		this.upPress = false;
 		this.leftPress = false;
@@ -50,7 +54,7 @@ public class Player {
 
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		// Affichage du joueur
-		joueurVisu.draw(this.x *this.width , this.y * this.height , this.width, this.height);
+		joueurVisu.draw(this.x , this.y, this.width, this.height);
 	}
 
 	public void keyPressed(int key, char c) {
