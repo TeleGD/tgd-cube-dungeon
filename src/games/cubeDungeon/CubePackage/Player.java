@@ -8,12 +8,8 @@ import org.newdawn.slick.Image;
 
 public class Player {
 
-	private double x;
-	private double y;
-	private double speedX;
-	private double speedY;
-	private double newX;
-	private double newY;
+	private int x;
+	private int y;
 
 	private int width;
 	private int height;
@@ -21,16 +17,14 @@ public class Player {
 	private boolean downPress;
 	private boolean leftPress;
 	private boolean upPress;
-	private boolean droitegauche;
-	private boolean hautbas;
 	private Image joueurVisu;
 
 	private int col;
 
 	public Player(int Ncase,int sWidth, int sHeight) {
 		int taille =  Math.min(sHeight, sWidth)/(Ncase+2);
-		this.x = 50;
-		this.y = 50;
+		this.x = 2;
+		this.y = 2;
 		this.width = taille;
 		this.height = taille;
 		this.col = 0;
@@ -41,18 +35,18 @@ public class Player {
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta) {
-		this.horizontalMove();
-		this.verticalMove();
-		this.x += this.speedX * delta;
-		this.y += this.speedY * delta;
-		this.newX = this.x + this.speedX;
-		this.newY = this.y + this.speedY;
+		this.x += (this.rightPress ? 1 : (this.leftPress ? -1 : 0));
+		this.y += (this.upPress ? -1 : (this.downPress ? 1 : 0));
+		//solution caca en attendant le template arcade
+		this.upPress = false;
+		this.leftPress = false;
+		this.rightPress = false;
+		this.downPress =false;
 	}
 
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
-		// Affichage du carré bleu
-		context.setColor(Color.blue);
-		joueurVisu.draw((float) this.x, (float) this.y, this.width, this.height);
+		// Affichage du joueur
+		joueurVisu.draw(this.x *this.width , this.y * this.height , this.width, this.height);
 	}
 
 	public void keyPressed(int key, char c) {
@@ -60,22 +54,18 @@ public class Player {
 		switch (key) {
 			case Input.KEY_UP: {
 				this.upPress = true;
-				this.hautbas = false;
 				break;
 			}
 			case Input.KEY_DOWN: {
 				this.downPress = true;
-				this.hautbas = true;
 				break;
 			}
 			case Input.KEY_LEFT: {
 				this.leftPress = true;
-				this.droitegauche = false;
 				break;
 			}
 			case Input.KEY_RIGHT: {
 				this.rightPress = true;
-				this.droitegauche = true;
 				break;
 			}
 		}
@@ -103,53 +93,7 @@ public class Player {
 		}
 	}
 
-	private void horizontalMove() {
-		// Déplacement selon les flèches gauche et droite appuyées (détection des flèches multiples)
-		this.speedX = 0;
-		if ((this.leftPress && !this.rightPress) || (this.leftPress && this.rightPress && !this.droitegauche)) {
-			if (this.x > 0) {
-				this.speedX = -1;
-			}
-		}
-		if ((!this.leftPress && this.rightPress) || (this.leftPress && this.rightPress && this.droitegauche)) {
-			if (this.x < 1280 - this.width) {
-				this.speedX = 1;
-			}
-		}
-	}
-
-	private void verticalMove() {
-		// Déplacement selon les flèches haut et bas appuyées (détection des flèches multiples)
-		this.speedY = 0;
-		if ((this.upPress && !this.downPress) || (this.upPress && this.downPress && !this.hautbas)) {
-			if (this.y > 0) {
-				this.speedY = -1;
-			}
-		}
-		if ((!this.upPress && this.downPress) || (this.upPress && this.downPress && this.hautbas)) {
-			if (this.y < 720 - this.height) {
-				this.speedY = 1;
-			}
-		}
-	}
-
-	public void setNewX(double newX) {
-		this.newX = newX;
-	}
-
-	public double getNewX() {
-		return this.newX;
-	}
-
-	public void setNewY(double newY) {
-		this.newY = newY;
-	}
-
-	public double getNewY() {
-		return this.newY;
-	}
-
-	public void setX(double x) {
+	public void setX(int x) {
 		this.x = x;
 	}
 
@@ -157,7 +101,7 @@ public class Player {
 		return this.x;
 	}
 
-	public void setY(double y) {
+	public void setY(int y) {
 		this.y = y;
 	}
 
@@ -165,22 +109,7 @@ public class Player {
 		return this.y;
 	}
 
-	public void setSpeedX(double speedX) {
-		this.speedX = speedX;
-	}
-
-	public double getSpeedX() {
-		return this.speedX;
-	}
-
-	public void setSpeedY(double speedY) {
-		this.speedY = speedY;
-	}
-
-	public double getSpeedY() {
-		return this.speedY;
-	}
-
+	
 	public void setWidth(int width) {
 		this.width = width;
 	}

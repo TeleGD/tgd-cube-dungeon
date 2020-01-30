@@ -21,10 +21,27 @@ public class Tile {
 		this.y = (tile_size)*column+screen_height/2-(tile_size)*(N/2);
 		this.line = line;
 		this.column = column;
+		double choix = Math.random();
+		double broke = Math.random();
 		try {
-		this.texture = new Image("/res/images/blocktest.png");
+		if(choix<0.15) {
+			if (broke<0.07) {
+			this.texture = new Image("/res/images/brokensoil.png");
+			}else {	this.texture = new Image("/res/images/soil.png");}
+		}else if(choix<0.3){
+			if (broke<0.3) {
+				this.texture = new Image("/res/images/brokensand.png");
+				}else {	this.texture = new Image("/res/images/sand.png");}
+				
+		}else{
+			if (broke<0.4) {
+				this.texture = new Image("/res/images/brokenstone.png");
+				}else {	this.texture = new Image("/res/images/stone.png");}
+		}
 		}catch(Exception e) {e.printStackTrace();}
 	}
+	
+	
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		context.setColor(Color.white);
 		texture.draw(this.x,this.y, this.tile_size,this.tile_size);
