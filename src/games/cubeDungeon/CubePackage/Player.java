@@ -5,12 +5,13 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.Image;
+import games.cubeDungeon.World;
 
 public class Player {
 
 	private int x;
 	private int y;
-
+	private World world;
 	private int width;
 	private int height;
 	private boolean rightPress;
@@ -18,19 +19,22 @@ public class Player {
 	private boolean leftPress;
 	private boolean upPress;
 	private Image joueurVisu;
+	private Face face;
+	private int column;
+	private int line;
 
-	private int col;
-
-	public Player(int Ncase,int sWidth, int sHeight) {
+	public Player(int Ncase,int sWidth, int sHeight, World world, Face actual) {
 		int taille =  Math.min(sHeight, sWidth)/(Ncase+2);
-		this.x = 2;
-		this.y = 2;
+		this.x = 0;
+		this.y = 0;
 		this.width = taille;
 		this.height = taille;
-		this.col = 0;
+		this.column = 0;
+		this.world=world;
+		//this.face = actual;
 		try {
 			this.joueurVisu = new Image("/res/images/joueurVisuFirst.gif");
-		}catch(Exception e) {e.printStackTrace();}
+			}catch(Exception e) {e.printStackTrace();}
 		
 	}
 

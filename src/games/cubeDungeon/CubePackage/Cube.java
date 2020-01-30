@@ -16,7 +16,9 @@ public class Cube {
 		current_layer.render(container, game, context);
 	}
 	
-	
+	public Layer getLayer() {
+		return current_layer;
+	}
 	
 	
 	

@@ -26,7 +26,9 @@ public class Layer {
 		current_face.render(container, game, context);
 	}
 	
-	
+	public Face getActual() {
+		return current_face;
+	}
 	
 	
 	

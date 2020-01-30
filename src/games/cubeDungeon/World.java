@@ -38,7 +38,7 @@ public class World extends BasicGameState {
 		this.screen_width=container.getWidth();
 		this.screen_height=container.getHeight();
 		this.cube = new Cube(10,screen_width,screen_height);
-		this.Nico = new Player(10,screen_width,screen_height);
+		this.Nico = new Player(10,screen_width,screen_height, this, this.cube.getLayer().getActual());
 	}
 
 	@Override
