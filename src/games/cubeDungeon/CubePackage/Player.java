@@ -35,7 +35,7 @@ public class Player {
 		this.world=world;
 		
 		try {
-			this.joueurVisu = new Image("/res/images/joueurVisuFirst.gif");
+			this.joueurVisu = new Image("/res/images/poovron.png");
 			}catch(Exception e) {e.printStackTrace();}
 		
 	}
