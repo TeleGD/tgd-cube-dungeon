@@ -19,17 +19,21 @@ public class Player {
 	private boolean leftPress;
 	private boolean upPress;
 	private Image joueurVisu;
+	private Layer layer;
 	private Face face;
 	private int column;
 	private int line;
+	private int maxMove;
 
-	public Player(int Ncase,int sWidth, int sHeight, World world, Face actual) {
+	public Player(int Ncase,int sWidth, int sHeight, World world, Face currentFace, Layer currentLayer) {
 		int taille =  Math.min(sHeight, sWidth)/(Ncase+2);
-		this.face = actual;
+		this.face = currentFace;
+		this.layer=currentLayer;
 		this.width = taille;
 		this.height = taille;
 		this.column = 0;
 		this.line = 0;
+		this.maxMove = this.face.getSize();
 		this.x = this.face.getTile(line, column).getX();
 		this.y = this.face.getTile(line, column).getY();
 		this.world=world;
@@ -41,10 +45,41 @@ public class Player {
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta) {
-		this.column += (this.rightPress ? 1 : (this.leftPress ? -1 : 0));
-		this.line += (this.upPress ? 1 : (this.downPress ? -1 : 0));
+		//traitement du right
+		if (this.rightPress && column<maxMove-1) {
+			this.column += 1;
+		//rotation droite
+		}else if (this.rightPress && column==maxMove-1) {
+			this.column=0;
+			this.layer.rotate(1);
+		//traitement du left
+		}else if (this.leftPress && column>0) {
+			this.column += -1;
+		//rotation gauche
+		}else if (this.leftPress && column==0) {
+			this.column=maxMove-1;
+			this.layer.rotate(2);
+		//traitement du up
+		}if (this.upPress && line<maxMove-1) {
+			this.line += 1;
+		//rotation haut
+		}else if (this.upPress && line==maxMove-1) {
+			this.line=0;
+			this.layer.rotate(3);
+		//traitement du down
+		}if (this.downPress && line>0) {
+			this.line += -1;
+		//rotation bas
+		}else if (this.downPress && line==0) {
+			this.line=maxMove-1;
+			this.layer.rotate(4);
+		}
 		this.x = this.face.getTile(line, column).getX();
 		this.y = this.face.getTile(line, column).getY();
+		
+		
+		
+		
 		//solution caca en attendant le template arcade
 		this.upPress = false;
 		this.leftPress = false;

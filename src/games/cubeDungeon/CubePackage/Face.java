@@ -35,5 +35,7 @@ public class Face {
 		return(this.grille[i][j]);
 	}
 	
-	
+	public int getSize() {
+		return face_width;
+	}
 }
