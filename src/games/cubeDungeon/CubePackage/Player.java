@@ -9,8 +9,6 @@ import games.cubeDungeon.World;
 
 public class Player {
 
-	private int x;
-	private int y;
 	private World world;
 	private int width;
 	private int height;
@@ -34,8 +32,6 @@ public class Player {
 		this.column = 0;
 		this.line = 0;
 		this.maxMove = this.face.getSize();
-		this.x = this.face.getTile(line, column).getX();
-		this.y = this.face.getTile(line, column).getY();
 		this.world=world;
 		
 		try {
@@ -74,13 +70,8 @@ public class Player {
 			this.line=maxMove-1;
 			this.layer.rotate(4);
 		}
-		this.x = this.face.getTile(line, column).getX();
-		this.y = this.face.getTile(line, column).getY();
-		
-		
-		
-		
-		//solution caca en attendant le template arcade
+		//this.x = this.face.getTile(line, column).getX();
+		//this.y = this.face.getTile(line, column).getY();
 		this.upPress = false;
 		this.leftPress = false;
 		this.rightPress = false;
@@ -89,7 +80,7 @@ public class Player {
 
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		// Affichage du joueur
-		joueurVisu.draw(this.x , this.y, this.width, this.height);
+		joueurVisu.draw(this.face.getTile(line, column).getScreenPosX() , this.face.getTile(line, column).getScreenPosY(), this.width, this.height);
 	}
 
 	public void keyPressed(int key, char c) {
@@ -136,7 +127,7 @@ public class Player {
 		}
 	}
 
-	public void setX(int x) {
+	/*public void setX(int x) {
 		this.x = x;
 	}
 
@@ -152,7 +143,7 @@ public class Player {
 		return this.y;
 	}
 
-	
+	*/
 	public void setWidth(int width) {
 		this.width = width;
 	}

@@ -10,15 +10,18 @@ import org.newdawn.slick.Image;
 public class Tile {
 	
 	int line, column; // positions dans la grille
-	int x, y; // position pour l'affichage
+	int screen_w, screen_h; // position pour l'affichage
+	int NumByCol;
 	int tile_size;
+	
 	Image texture; 
 
 	
 	public Tile(int line, int column, int screen_width, int screen_height, int face_width, int N) {
 		this.tile_size = Math.min(screen_height,screen_width)/(N+2);
-		this.x = (tile_size)*column+screen_width/2-(tile_size)*(N/2);
-		this.y = screen_height-((tile_size)*line+screen_height/2-(tile_size)*(N/2)+tile_size);
+		this.screen_h = screen_height;
+		this.screen_w = screen_width;
+		this.NumByCol = N;
 		this.line = line;
 		this.column = column;
 		double choix = Math.random();
@@ -44,14 +47,16 @@ public class Tile {
 	
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		context.setColor(Color.white);
-		texture.draw(this.x,this.y, this.tile_size,this.tile_size);
+		texture.draw(getScreenPosX(),getScreenPosY(), this.tile_size,this.tile_size);
 	}
 	
-	public int getX() {
-		return this.x;
+	public int getScreenPosX() {
+		return ((tile_size)*column+screen_w/2-(tile_size)*(NumByCol/2));
 	}
+	
+	public int getScreenPosY() {
+		return (screen_h-((tile_size)*line+screen_h/2-(tile_size)*(NumByCol/2)+tile_size));
+	}
+	
 
-	public int getY() {
-		return this.y;
-	}
 }
