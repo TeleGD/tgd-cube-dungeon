@@ -15,7 +15,8 @@ public class Tile {
 	int tile_size;
 	TypeSol tile_type;
 	Image texture;
-
+	int digging; //le niveau 0 veut dire creusé, les autres correspondent à diff types de sols (à def)
+	
 	// Définit les différents types de sol existants.
 	public enum TypeSol {
 		terre, terreCreusee, roche, rocheCreusee, sable, sableCreuse;
@@ -29,6 +30,7 @@ public class Tile {
 		this.line = line;
 		this.column = column;
 		this.changeType(TypeSol.terre);
+		this.digging = 1;
 	}
 
 	// Change le type de sol de la case.
@@ -38,21 +40,27 @@ public class Tile {
 			switch(this.tile_type) {
 				case terre :
 					this.texture = new Image("/res/images/soil.png");
+					this.digging = 1;
 					break;
 				case terreCreusee :
 					this.texture = new Image("/res/images/brokensoil.png");
+					this.digging = 0;
 					break;
 				case roche :
 					this.texture = new Image("/res/images/stone.png");
+					this.digging = 2;
 					break;
 				case rocheCreusee :
 					this.texture = new Image("/res/images/brokenstone.png");
+					this.digging = 0;
 					break;
 				case sable :
 					this.texture = new Image("/res/images/sand.png");
+					this.digging = 3;
 					break;
 				case sableCreuse :
 					this.texture = new Image("/res/images/brokensand.png");
+					this.digging = 0;
 					break;
 			}
 		} catch(Exception e) {e.printStackTrace();}
@@ -71,5 +79,6 @@ public class Tile {
 		return (screen_h-((tile_size)*line+screen_h/2-(tile_size)*(NumByCol/2)+tile_size));
 	}
 
+	public int getDigging() {return(this.digging);}
 
 }
