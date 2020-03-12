@@ -6,6 +6,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.Image;
 import games.cubeDungeon.World;
+import games.cubeDungeon.CubePackage.Tile.TypeSol;
 
 public class Player {
 
@@ -22,6 +23,7 @@ public class Player {
 	private int column;
 	private int line;
 	private int maxMove;
+	private int nivMinage;
 
 	public Player(int Ncase,int sWidth, int sHeight, World world, Face currentFace, Layer currentLayer) {
 		int taille =  Math.min(sHeight, sWidth)/(Ncase+2);
@@ -33,42 +35,77 @@ public class Player {
 		this.line = 0;
 		this.maxMove = this.face.getSize();
 		this.world=world;
-		
+		this.nivMinage=2;
 		try {
-			this.joueurVisu = new Image("/res/images/poovron.png");
+			this.joueurVisu = new Image("/res/images/PurpleDwarfR.png");
 			}catch(Exception e) {e.printStackTrace();}
 		
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta) {
 		//traitement du right
-		if (this.rightPress && column<maxMove-1) {
+		if (this.rightPress && column<maxMove-1 && this.face.getTile(line, column+1).getDigging()==0) {
 			this.column += 1;
-		//rotation droite
-		}else if (this.rightPress && column==maxMove-1) {
+			try {
+				this.joueurVisu = new Image("/res/images/PurpleDwarfR.png");
+				}catch(Exception e) {e.printStackTrace();}
+			
+		}else if (this.rightPress && column<maxMove-1 && this.face.getTile(line, column+1).getDigging()<=this.nivMinage) {
+			this.face.changeType(this.face.getTile(line, column+1), TypeSol.terreCreusee);
+			try {
+				this.joueurVisu = new Image("/res/images/PurpleDwarfR.png");
+				}catch(Exception e) {e.printStackTrace();}
+			//rotation droite
+		}else if (this.rightPress && column==maxMove-1 ) {
 			this.column=0;
 			this.layer.rotate(1);
+			this.face=this.layer.getCurrentFace();
+			try {
+				this.joueurVisu = new Image("/res/images/PurpleDwarfR.png");
+				}catch(Exception e) {e.printStackTrace();}
+			
 		//traitement du left
-		}else if (this.leftPress && column>0) {
+		}else if (this.leftPress && column>0 && this.face.getTile(line, column-1).getDigging()==0) {
 			this.column += -1;
-		//rotation gauche
-		}else if (this.leftPress && column==0) {
+			try {
+				this.joueurVisu = new Image("/res/images/PurpleDwarfL.png");
+				}catch(Exception e) {e.printStackTrace();}
+			
+		}else if (this.leftPress && column>0 && this.face.getTile(line, column-1).getDigging()<=this.nivMinage) {
+			this.face.changeType(this.face.getTile(line, column-1), TypeSol.terreCreusee);
+			try {
+				this.joueurVisu = new Image("/res/images/PurpleDwarfL.png");
+				}catch(Exception e) {e.printStackTrace();}
+			
+			//rotation gauche
+		}else if (this.leftPress && column==0 ) {
 			this.column=maxMove-1;
 			this.layer.rotate(2);
+			this.face=this.layer.getCurrentFace();
+			try {
+				this.joueurVisu = new Image("/res/images/PurpleDwarfL.png");
+				}catch(Exception e) {e.printStackTrace();}
+			
 		//traitement du up
-		}if (this.upPress && line<maxMove-1) {
+		}if (this.upPress && line<maxMove-1 && this.face.getTile(line+1, column).getDigging()==0) {
 			this.line += 1;
+		}else if (this.upPress && line<maxMove-1 && this.face.getTile(line+1, column).getDigging()<=this.nivMinage) {
+			this.face.changeType(this.face.getTile(line+1, column), TypeSol.terreCreusee);
 		//rotation haut
 		}else if (this.upPress && line==maxMove-1) {
 			this.line=0;
 			this.layer.rotate(3);
+			this.face=this.layer.getCurrentFace();
 		//traitement du down
-		}if (this.downPress && line>0) {
+		}if (this.downPress && line>0 && this.face.getTile(line-1, column).getDigging()==0) {
 			this.line += -1;
+		}else if (this.downPress && line>0 && this.face.getTile(line-1, column).getDigging()<=this.nivMinage) {
+			this.face.changeType(this.face.getTile(line-1, column), TypeSol.terreCreusee);
 		//rotation bas
 		}else if (this.downPress && line==0) {
 			this.line=maxMove-1;
 			this.layer.rotate(4);
+			this.face=this.layer.getCurrentFace();
 		}
 		//this.x = this.face.getTile(line, column).getX();
 		//this.y = this.face.getTile(line, column).getY();

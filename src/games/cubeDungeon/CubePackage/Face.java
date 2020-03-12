@@ -1,12 +1,11 @@
 package games.cubeDungeon.CubePackage;
 
 import java.util.ArrayList;
-
+import java.util.Random;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.StateBasedGame;
-import java.util.Random;
-//import java.lang.Math.*;
+import games.cubeDungeon.CubePackage.Tile.TypeSol;
 
 public class Face {
 
@@ -47,6 +46,10 @@ public class Face {
 				grille[i][j].render(container, game, context);
 			}
 		}
+	}
+	public void changeType(Tile tile, TypeSol newType) {
+		tile.changeType(newType);
+
 	}
 
 	public Tile getTile(int i, int j) {
