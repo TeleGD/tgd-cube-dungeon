@@ -1,12 +1,15 @@
 package games.cubeDungeon.CubePackage;
-import org.newdawn.slick.Color;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.Image;
+
 import games.cubeDungeon.World;
 import games.cubeDungeon.CubePackage.Tile.TypeSol;
+
+import app.AppLoader;
 
 public class Player {
 
@@ -37,9 +40,9 @@ public class Player {
 		this.world=world;
 		this.nivMinage=2;
 		try {
-			this.joueurVisu = new Image("/res/images/PurpleDwarfR.png");
+			this.joueurVisu = AppLoader.loadPicture("/images/cubeDungeon/PurpleDwarfR.png");
 			}catch(Exception e) {e.printStackTrace();}
-		
+
 	}
 
 	public void update(GameContainer container, StateBasedGame game, int delta) {
@@ -47,13 +50,13 @@ public class Player {
 		if (this.rightPress && column<maxMove-1 && this.face.getTile(line, column+1).getDigging()==0) {
 			this.column += 1;
 			try {
-				this.joueurVisu = new Image("/res/images/PurpleDwarfR.png");
+				this.joueurVisu = AppLoader.loadPicture("/images/cubeDungeon/PurpleDwarfR.png");
 				}catch(Exception e) {e.printStackTrace();}
-			
+
 		}else if (this.rightPress && column<maxMove-1 && this.face.getTile(line, column+1).getDigging()<=this.nivMinage) {
 			this.face.changeType(this.face.getTile(line, column+1), TypeSol.terreCreusee);
 			try {
-				this.joueurVisu = new Image("/res/images/PurpleDwarfR.png");
+				this.joueurVisu = AppLoader.loadPicture("/images/cubeDungeon/PurpleDwarfR.png");
 				}catch(Exception e) {e.printStackTrace();}
 			//rotation droite
 		}else if (this.rightPress && column==maxMove-1 ) {
@@ -61,41 +64,41 @@ public class Player {
 			this.layer.rotate(1);
 			this.face=this.layer.getCurrentFace();
 			try {
-				this.joueurVisu = new Image("/res/images/PurpleDwarfR.png");
+				this.joueurVisu = AppLoader.loadPicture("/images/cubeDungeon/PurpleDwarfR.png");
 				}catch(Exception e) {e.printStackTrace();}
-			
+
 		//traitement du left
 		}else if (this.leftPress && column>0 && this.face.getTile(line, column-1).getDigging()==0) {
 			this.column += -1;
 			try {
-				this.joueurVisu = new Image("/res/images/PurpleDwarfL.png");
+				this.joueurVisu = AppLoader.loadPicture("/images/cubeDungeon/PurpleDwarfL.png");
 				}catch(Exception e) {e.printStackTrace();}
-			
+
 		}else if (this.leftPress && column>0 && this.face.getTile(line, column-1).getDigging()<=this.nivMinage) {
 			this.face.changeType(this.face.getTile(line, column-1), TypeSol.terreCreusee);
 			try {
-				this.joueurVisu = new Image("/res/images/PurpleDwarfL.png");
+				this.joueurVisu = AppLoader.loadPicture("/images/cubeDungeon/PurpleDwarfL.png");
 				}catch(Exception e) {e.printStackTrace();}
-			
+
 			//rotation gauche
 		}else if (this.leftPress && column==0 ) {
 			this.column=maxMove-1;
 			this.layer.rotate(2);
 			this.face=this.layer.getCurrentFace();
 			try {
-				this.joueurVisu = new Image("/res/images/PurpleDwarfL.png");
+				this.joueurVisu = AppLoader.loadPicture("/images/cubeDungeon/PurpleDwarfL.png");
 				}catch(Exception e) {e.printStackTrace();}
-			
+
 		//traitement du up
 		}if (this.upPress && line<maxMove-1 && this.face.getTile(line+1, column).getDigging()==0) {
 			this.line += 1;
 			try {
-				this.joueurVisu = new Image("/res/images/PurpleDwarfB.png");
+				this.joueurVisu = AppLoader.loadPicture("/images/cubeDungeon/PurpleDwarfB.png");
 				}catch(Exception e) {e.printStackTrace();}
 		}else if (this.upPress && line<maxMove-1 && this.face.getTile(line+1, column).getDigging()<=this.nivMinage) {
 			this.face.changeType(this.face.getTile(line+1, column), TypeSol.terreCreusee);
 			try {
-				this.joueurVisu = new Image("/res/images/PurpleDwarfB.png");
+				this.joueurVisu = AppLoader.loadPicture("/images/cubeDungeon/PurpleDwarfB.png");
 				}catch(Exception e) {e.printStackTrace();}
 		//rotation haut
 		}else if (this.upPress && line==maxMove-1) {
@@ -103,18 +106,18 @@ public class Player {
 			this.layer.rotate(3);
 			this.face=this.layer.getCurrentFace();
 			try {
-				this.joueurVisu = new Image("/res/images/PurpleDwarfB.png");
+				this.joueurVisu = AppLoader.loadPicture("/images/cubeDungeon/PurpleDwarfB.png");
 				}catch(Exception e) {e.printStackTrace();}
 		//traitement du down
 		}if (this.downPress && line>0 && this.face.getTile(line-1, column).getDigging()==0) {
 			this.line += -1;
 			try {
-				this.joueurVisu = new Image("/res/images/PurpleDwarfF.png");
+				this.joueurVisu = AppLoader.loadPicture("/images/cubeDungeon/PurpleDwarfF.png");
 				}catch(Exception e) {e.printStackTrace();}
 		}else if (this.downPress && line>0 && this.face.getTile(line-1, column).getDigging()<=this.nivMinage) {
 			this.face.changeType(this.face.getTile(line-1, column), TypeSol.terreCreusee);
 			try {
-				this.joueurVisu = new Image("/res/images/PurpleDwarfF.png");
+				this.joueurVisu = AppLoader.loadPicture("/images/cubeDungeon/PurpleDwarfF.png");
 				}catch(Exception e) {e.printStackTrace();}
 		//rotation bas
 		}else if (this.downPress && line==0) {
@@ -122,7 +125,7 @@ public class Player {
 			this.layer.rotate(4);
 			this.face=this.layer.getCurrentFace();
 			try {
-				this.joueurVisu = new Image("/res/images/PurpleDwarfF.png");
+				this.joueurVisu = AppLoader.loadPicture("/images/cubeDungeon/PurpleDwarfF.png");
 				}catch(Exception e) {e.printStackTrace();}
 		}
 		//this.x = this.face.getTile(line, column).getX();

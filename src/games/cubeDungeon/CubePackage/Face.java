@@ -1,13 +1,12 @@
 package games.cubeDungeon.CubePackage;
 
-
-import java.util.ArrayList;
 import java.util.Random;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.StateBasedGame;
-import games.cubeDungeon.CubePackage.Tile.TypeSol;
 
+import games.cubeDungeon.CubePackage.Tile.TypeSol;
 
 public class Face {
 

@@ -7,10 +7,9 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
-import games.cubeDungeon.CubePackage.*;
 
-import games.cubeDungeon.CubePackage.Tile;
-
+import games.cubeDungeon.CubePackage.Cube;
+import games.cubeDungeon.CubePackage.Player;
 
 public class World extends BasicGameState {
 
@@ -35,10 +34,6 @@ public class World extends BasicGameState {
 	@Override
 	public void init(GameContainer container, StateBasedGame game) {
 		/* Méthode exécutée une unique fois au chargement du programme */
-		this.screen_width=container.getWidth();
-		this.screen_height=container.getHeight();
-		this.cube = new Cube(15,screen_width,screen_height);
-		this.Nico = new Player(15,screen_width,screen_height, this, this.cube.getLayer().getCurrentFace(), this.cube.getLayer());
 	}
 
 	@Override
@@ -82,6 +77,10 @@ public class World extends BasicGameState {
 
 	public void play(GameContainer container, StateBasedGame game) {
 		/* Méthode exécutée une unique fois au début du jeu */
+		this.screen_width=container.getWidth();
+		this.screen_height=container.getHeight();
+		this.cube = new Cube(15,screen_width,screen_height);
+		this.Nico = new Player(15,screen_width,screen_height, this, this.cube.getLayer().getCurrentFace(), this.cube.getLayer());
 	}
 
 	public void pause(GameContainer container, StateBasedGame game) {

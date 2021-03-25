@@ -24,17 +24,43 @@ public class AppLoader {
 	private static Map<String, Map<Integer, Map<Integer, AppFont>>> fontList;
 	private static Map<String, AppPicture> pictureList;
 	private static Map<String, AppAudio> audioList;
+	private static Map<String, AppIcon> iconList;
 	private static Map<String, AppData> dataList;
 
 	static {
 		AppLoader.fontList = new HashMap<String, Map<Integer, Map<Integer, AppFont>>>();
 		AppLoader.pictureList = new HashMap<String, AppPicture>();
 		AppLoader.audioList = new HashMap<String, AppAudio>();
+		AppLoader.iconList = new HashMap<String, AppIcon>();
 		AppLoader.dataList = new HashMap<String, AppData>();
 		SoundStore.get().init();
 	}
 
-	private static InputStream openStream(String filename) {
+	public static String resolve(String filename) {
+		InputStream stream = null;
+		String path = null;
+		if (filename != null && filename.startsWith("/")) {
+			try {
+				path = System.class.getResource(filename).getPath();
+				stream = new FileInputStream(path);
+				stream.close();
+			} catch (Exception error) {
+				path = null;
+			}
+			if (path == null) {
+				try {
+					path = filename.replaceAll("/+", "/").substring(1).replace("/", File.separator);
+					stream = ResourceLoader.getResourceAsStream(path);
+					stream.close();
+				} catch (Exception error) {
+					path = null;
+				}
+			}
+		}
+		return path;
+	}
+
+	public static InputStream openStream(String filename) {
 		InputStream stream = null;
 		if (filename != null && filename.startsWith("/")) {
 			try {
@@ -49,7 +75,7 @@ public class AppLoader {
 		return stream;
 	}
 
-	private static void closeStream(InputStream stream) {
+	public static void closeStream(InputStream stream) {
 		try {
 			stream.close();
 		} catch (Exception error) {}
@@ -115,6 +141,24 @@ public class AppLoader {
 				resource = new AppAudio(filename);
 			}
 			AppLoader.audioList.put(filename, resource);
+		}
+		return resource;
+	}
+
+	public static AppIcon loadIcon(String filename) {
+		AppIcon resource = AppLoader.iconList.get(filename);
+		if (resource == null) {
+			InputStream stream = AppLoader.openStream(filename);
+			if (stream != null) {
+				try {
+					resource = new AppIcon(filename, stream);
+				} catch (Exception error) {}
+				AppLoader.closeStream(stream);
+			}
+			if (resource == null) {
+				resource = new AppIcon(filename);
+			}
+			AppLoader.iconList.put(filename, resource);
 		}
 		return resource;
 	}

@@ -12,8 +12,8 @@ public class Layer {
 	private Face top, bottom, front, left, right, back;
 	private Face current_face;
 	private Face currentLeft, currentTop, currentBottom, currentRight, currentBack;
-	
-	
+
+
 	public Layer(int face_width, int screen_width, int screen_height, int N) {
 		this.front  = new Face(face_width, screen_width, screen_height, N);
 		this.left   = new Face(face_width, screen_width, screen_height, N);
@@ -28,11 +28,11 @@ public class Layer {
 		this.currentBottom = this.bottom;
 		this.currentBack = this.back;
 	}
-	
+
 	public void render(GameContainer container, StateBasedGame game, Graphics context) {
 		current_face.render(container, game, context);
 	}
-	
+
 	public void rotate(int i) {
 		//i=1 rotation droite, i=2 rotation gauche, i=3 rotation haut, i=4 rotation bas
 		Face tempoStock = this.current_face;
@@ -58,16 +58,16 @@ public class Layer {
 			this.currentTop=tempoStock;
 		}
 	}
-	
+
 
 	public Face getLeftFace() {
 		return currentLeft;
 	}
-	
+
 	public Face getRightFace() {
 		return currentRight;
-	}	
-	
+	}
+
 	public Face getTopFace() {
 		return currentTop;
 	}
@@ -77,9 +77,9 @@ public class Layer {
 	public Face getCurrentFace() {
 		return current_face;
 	}
-	
+
 	public Face getBack() {
 		return currentBack;
 	}
-	
+
 }

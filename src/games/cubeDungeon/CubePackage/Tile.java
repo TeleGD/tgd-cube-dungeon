@@ -3,9 +3,10 @@ package games.cubeDungeon.CubePackage;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.state.StateBasedGame;
-//import java.lang.Math.*;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.state.StateBasedGame;
+
+import app.AppLoader;
 
 public class Tile {
 
@@ -16,7 +17,7 @@ public class Tile {
 	TypeSol tile_type;
 	Image texture;
 	int digging; //le niveau 0 veut dire creusé, les autres correspondent à diff types de sols (à def)
-	
+
 	// Définit les différents types de sol existants.
 	public enum TypeSol {
 		terre, terreCreusee, roche, rocheCreusee, sable, sableCreuse;
@@ -39,27 +40,27 @@ public class Tile {
 		try {
 			switch(this.tile_type) {
 				case terre :
-					this.texture = new Image("/res/images/soil.png");
+					this.texture = AppLoader.loadPicture("/images/cubeDungeon/soil.png");
 					this.digging = 1;
 					break;
 				case terreCreusee :
-					this.texture = new Image("/res/images/brokensoil.png");
+					this.texture = AppLoader.loadPicture("/images/cubeDungeon/brokensoil.png");
 					this.digging = 0;
 					break;
 				case roche :
-					this.texture = new Image("/res/images/stone.png");
+					this.texture = AppLoader.loadPicture("/images/cubeDungeon/stone.png");
 					this.digging = 2;
 					break;
 				case rocheCreusee :
-					this.texture = new Image("/res/images/brokenstone.png");
+					this.texture = AppLoader.loadPicture("/images/cubeDungeon/brokenstone.png");
 					this.digging = 0;
 					break;
 				case sable :
-					this.texture = new Image("/res/images/sand.png");
+					this.texture = AppLoader.loadPicture("/images/cubeDungeon/sand.png");
 					this.digging = 3;
 					break;
 				case sableCreuse :
-					this.texture = new Image("/res/images/brokensand.png");
+					this.texture = AppLoader.loadPicture("/images/cubeDungeon/brokensand.png");
 					this.digging = 0;
 					break;
 			}
