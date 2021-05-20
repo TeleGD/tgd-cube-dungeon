@@ -1,0 +1,6 @@
+- Christophe Belleut (@belleut1u)
+- Clément Crouzet (@CrouzetC)
+- Erwan Kessler (@hube12)
+- Evan Weisse (@Hevy1)
+- Joannès Guichon (@joannes-guichon)
+- Paul Chipot (@Bip-Biip)
